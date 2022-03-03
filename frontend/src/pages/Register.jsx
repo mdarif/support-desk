@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaUser } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import { register } from "../features/auth/authSlice";
+import { register, reset } from "../features/auth/authSlice";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -21,13 +22,29 @@ function Register() {
    */
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+
   /**
    * useSelector() allows you to extract data from the Redux store state,
    * using a selector function.
    */
-  const { user, isLoading, isSuccess, message } = useSelector(
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess || user) {
+      navigate("/");
+    }
+
+    dispatch(reset());
+
+    // Redirect when logged in successfully
+  }, [isError, isSuccess, user, navigate, message, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({

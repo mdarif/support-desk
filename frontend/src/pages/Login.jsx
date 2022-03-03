@@ -12,7 +12,17 @@ function Login() {
 
   const { email, password } = formData; // destructuring
 
+  /**
+   * useDispatch() returns a reference to the dispatch function
+   * from the Redux store. You may use it to dispatch actions
+   * as needed.
+   */
   const dispatch = useDispatch();
+
+  /**
+   * useSelector() allows you to extract data from the Redux store state,
+   * using a selector function.
+   */
 
   const { user, isLoading, isSuccess, message } = useSelector(
     (state) => state.auth
