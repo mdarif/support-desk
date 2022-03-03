@@ -37,13 +37,12 @@ function Register() {
       toast.error(message);
     }
 
+    // Redirect when logged in
     if (isSuccess || user) {
       navigate("/");
     }
 
-    dispatch(reset());
-
-    // Redirect when logged in successfully
+    // dispatch(reset());
   }, [isError, isSuccess, user, navigate, message, dispatch]);
 
   const onChange = (e) => {
@@ -118,7 +117,7 @@ function Register() {
           </div>
           <div className="form-group">
             <input
-              type="password2"
+              type="password"
               id="password2"
               name="password2"
               value={password2}

@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import authService from './authService'
 
-// Get user from localStorage
+// Get logged in user info from localStorage
 const user = JSON.parse(localStorage.getItem('user'))
 
 const initialState = {
@@ -46,6 +46,11 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   console.log(user)
 })
 
+// Logout user
+export const logout = createAsyncThunk('auth/logout', async () => {
+  await authService.logout()
+})
+
 /**
  * A function that accepts an initial state, an object of reducer functions,
  * and a "slice name", and automatically generates action creators and
@@ -86,6 +91,9 @@ export const authSlice = createSlice({
         state.isLoading = false
         state.isError = true
         state.message = action.payload
+        state.user = null
+      })
+      .addCase(logout.fulfilled, state => {
         state.user = null
       })
   }
