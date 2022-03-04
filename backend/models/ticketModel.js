@@ -14,7 +14,7 @@ const ticketSchema = mongoose.Schema(
         'iPhone',
         'iPad',
         'MacBook',
-        'MacBook Pro',
+        'Macbook Pro',
         'iMac',
         'iPod',
         'iPod touch'
