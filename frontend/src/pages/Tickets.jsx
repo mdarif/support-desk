@@ -6,7 +6,7 @@ import { getTickets, reset } from "../features/tickets/ticketSlice";
 import TicketItem from "../components/TicketItem";
 
 function Tickets() {
-  const { tickets, isLoading, isError, isSuccess, message } = useSelector(
+  const { tickets, isLoading, isSuccess } = useSelector(
     (state) => state.tickets
   );
 
