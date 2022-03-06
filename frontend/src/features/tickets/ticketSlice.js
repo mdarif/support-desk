@@ -98,6 +98,32 @@ export const getTicket = createAsyncThunk(
   }
 )
 
+// Close ticket
+export const closeTicket = createAsyncThunk(
+  'tickets/close',
+  async (ticketId, thunkAPI) => {
+    /**
+     * thunkAPI: an object containing all of the parameters
+     * that are normally passed to a Redux thunk function,
+     * as well as additional options: https://redux-toolkit.js.org/api/createAsyncThunk
+     */
+    try {
+      // Token is required for authentication
+      const token = thunkAPI.getState().auth.user.token
+      return await ticketService.closeTicket(ticketId, token) // Service function
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 export const ticketSlice = createSlice({
   name: 'ticket',
   initialState,
@@ -143,6 +169,14 @@ export const ticketSlice = createSlice({
         state.isLoading = false
         state.isError = true
         state.message = action.payload
+      })
+      .addCase(closeTicket.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.tickets.map(ticket =>
+          ticket._id === action.payload._id
+            ? (ticket.status = 'closed')
+            : ticket
+        )
       })
   }
 })
