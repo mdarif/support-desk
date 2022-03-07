@@ -105,7 +105,7 @@ function Ticket() {
         <h2>Notes</h2>
       </header>
 
-      {ticket.status !== "closed" && (
+      {ticket.status !== "close" && (
         <button onClick={openModal} className="btn">
           <FaPlus /> Add Note
         </button>
@@ -144,7 +144,7 @@ function Ticket() {
         <NoteItem key={note._id} note={note} />
       ))}
 
-      {ticket.status !== "closed" && (
+      {ticket.status !== "close" && (
         <button onClick={onTicketClose} className="btn btn-block btn-danger">
           Close Ticket
         </button>
