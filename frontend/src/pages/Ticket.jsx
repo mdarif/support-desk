@@ -30,6 +30,12 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 function Ticket() {
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [noteText, setNoteText] = useState("");
 
@@ -94,7 +100,8 @@ function Ticket() {
           </span>
         </h2>
         <h3>
-          Date Submitted: {new Date(ticket.createdAt).toLocaleString("en-IN")}
+          Date Submitted:{" "}
+          {new Date(ticket.createdAt).toLocaleString("en-US", options)}
         </h3>
         <h3>Product: {ticket.product}</h3>
         <hr />
