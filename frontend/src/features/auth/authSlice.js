@@ -23,19 +23,57 @@ const initialState = {
  * lifecycle actions based on the returned promise.
  * This abstracts the standard recommended approach for handling async request lifecycles.
  */
+
+/**
+ * 'auth/register' is the action type string in this case.
+ * Whenever this function is dispatched from a component within our application,
+ * 'createAsyncThunk' generates promise lifecycle action types using this
+ * string as a prefix.
+ * pending: auth/register/pending
+ * fulfilled: auth/register/fulfilled
+ * rejected: auth/register/rejected
+ */
+
+/**
+ * On its initial call, 'createAsyncThunk' dispatches the auth/register/pending
+ * lifecycle action type. The payloadCreator then executes to return either a
+ * result or an error.
+ *
+ * In the event of an error, auth/register/rejected is dispatched and
+ * 'createAsyncThunk' should either return a rejected promise containing
+ * an Error instance, a plain descriptive message,
+ * or a resolved promise with a RejectWithValue
+ * argument as returned by the thunkAPI.rejectWithValue function.
+ *
+ * If our data fetch is successful, the posts/getPosts/fulfilled action
+ * type gets dispatched.
+ *
+ */
+
 export const register = createAsyncThunk(
+  //action type string
   'auth/register',
+
+  // callback function
   async (user, thunkAPI) => {
     try {
       return await authService.register(user)
     } catch (error) {
+      /**
+       * Remember that when your 'payloadCreator' returns a rejected promise,
+       * the 'rejected' action is dispatched (with 'action.payload' as 'undefined').
+       */
       const message =
         (error.response &&
           error.response.data &&
           error.response.data.message) ||
         error.message ||
         error.toString()
-
+      /**
+       * By using 'thunkAPI', you can return a resolved promise to the reducer,
+       * which has 'action.payload' set to a custom value of your choice.
+       * 'thunkAPI' uses its 'rejectWithValue' property to perform this.
+       */
       return thunkAPI.rejectWithValue(message)
     }
   }
@@ -61,9 +99,13 @@ export const logout = createAsyncThunk('auth/logout', async () => {
 })
 
 /**
- * A function that accepts an initial state, an object of reducer functions,
+ * A Slice 'createSlice' function that accepts an initial state, an object of reducer functions,
  * and a "slice name", and automatically generates action creators and
  * action types that correspond to the reducers and state.
+ */
+/**
+ * Within 'createSlice', synchronous requests made to the store are handled
+ * in the reducers object while extraReducers handles asynchronous requests
  */
 export const authSlice = createSlice({
   // A name, used in action types
@@ -80,11 +122,20 @@ export const authSlice = createSlice({
     }
   },
   /**
+   *
    * extraReducers: One of the key concepts of Redux is that each slice reducer "owns"
    * its slice of state, and that many slice reducers can independently
    * respond to the same action type. extraReducers allows createSlice
    * to respond to other action types besides the types it has generated.
-   * */
+   *
+   */
+
+  /**
+   *
+   * The three lifecycle action types mentioned earlier can then be evaluated
+   * in extraReducers, where we make our desired changes to the store.
+   * In this case
+   */
   extraReducers: builder => {
     builder
       .addCase(register.pending, state => {
@@ -122,4 +173,8 @@ export const authSlice = createSlice({
 })
 
 export const { reset } = authSlice.actions
+/**
+ * Every slice you create must be added to your Redux store (src/app/store.js)
+ * so you can gain access to its contents.
+ */
 export default authSlice.reducer

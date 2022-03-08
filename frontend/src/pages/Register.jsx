@@ -21,6 +21,12 @@ function Register() {
    * from the Redux store. You may use it to dispatch actions
    * as needed.
    */
+
+  /**
+   * By using 'useSelector' and 'useDispatch' from 'react-redux',
+   * we can read state from a Redux store and dispatch any
+   * action from a component, respectively.
+   */
   const dispatch = useDispatch();
 
   const navigate = useNavigate();

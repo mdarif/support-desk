@@ -7,8 +7,14 @@ const User = require('../models/userModel')
 // @desc    Register a new user
 // @route   /api/users
 // @access  Public
+
+/**
+ * 'asyncHandler' is a simple middleware for handling exceptions
+ * inside of async express routes and passing them to your express
+ * error handlers.
+ */
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body // destructuring
+  const { name, email, password } = req.body // destructure the request body params
 
   // Validation
   if (!name || !email || !password) {

@@ -6,7 +6,7 @@
 <h3 align="center">Create, build and deploy MERN stack applications with breeze.</h3>
 
 ## Introduction
-A Fullstack MERN support ticket system with Redux Toolkit.
+A Fullstack MERN Support Ticket System with Redux Toolkit.
 ![MERN Stack](etc/mern-stack.png)
 ![MERN Architerure](etc/what-is-mern-stack-architecture.png)
 
@@ -131,7 +131,7 @@ Provided in the root of the project, a `.sample.env` for guidance.
 
 ### Run backend & frontend servers concurrently
 
-In order to run the backend & frontend servers using concurrently:
+In order to run the backend & frontend servers using [concurrently](https://www.npmjs.com/package/concurrently):
 
 ```sh
 npm run dev
@@ -144,23 +144,30 @@ You will see the build errors and lint warnings in the console.
 
 ### Routes
 
-Inside of `/backend/controllers/userController.js` are a collection of routes that involve the five primary `CRUD` functions of persistent storage.
+Inside of `/backend/controllers/userController.js` are a collection of routes that involve `CRUD` functions of persistent storage.
 
-- **POST** `/api/users` - Registers a new user, requires a `json` object, containing { name, email, password }
-- **POST** `/api/users/login` - Login a user
-- **DELETE** `/api/delete_a_data/:dataId` - Deletes a single document from the database, based on a dataId.
-- **PATCH** `/api/update_a_data/:dataId` - Updates a single document from the database, based on a dataId.
+- **POST** `/api/users` - Register/create a new user using **registerUser** method in User Controller, requires a **URL-encoded** data in the **Body** containing key value of { name, email, password }, it returns the unique ID along with JWT token
+- **POST** `/api/users/login` - Register/create a new user using **loginUser** method in User Controller, requires a **URL-encoded** data in the **Body** containing key value of { email, password }, it returns the registered numeric ID from DB along with unique generated JWT token
+- **GET** `/api/users/me` - Get current user
 
 Inside of `/backend/controllers/ticketController.js` are a collection of.
 
-- **GET** `/api/tickets` - A test route used in development.
-- **POST** `/register` - Registers a new user, requires a `json` object, containing { name, email, password }
+  getTickets, [done]
+  getTicket, [done]
+  createTicket,
+  updateTicket
+  deleteTicket,
+
+- **GET** `/api/tickets` - Get all the tickets of logged in user while passing the right `Authorization` `Bearer Token`.
+- **POST** `/api/tickets` - Create a new ticket, requires a **URL-encoded** data in the **Body** containing key value of { product, description }
+- **GET** `/api/tickets/:id` - Get the particular ticket detail  while passing the right `Authorization` `Bearer Token`.
 - **POST** `/login` - Logs in an existing user, requires a `json` object, containing { username: String, password: String }
 - **GET** `/logout` - Logs out a logged in user.
 - **GET** `/authenticated` - Checks to see if user is logged in. Used for protecting routes.
 - **POST** `/admin` - Checks to see if a user is an admin. Used for protecting routes.
 - **GET** `/create_a_data` - Adds a data to the users record. This is used as private data storage.
 - **GET** `/get_all_datas` - Gets all private data from the user.
+[Postman](https://learning.postman.com/docs/sending-requests/requests/#sending-body-data)
 
 ### Build an application
 
@@ -192,7 +199,7 @@ git commit -m "deploying my-app"
 heroku create my-app
 git push heroku master
 ```
-And within a few seconds, your application will be live at [https://my-app.herokuapp.com/](https://my-app.herokuapp.com/).
+And within a few seconds, your application will be live at [https://support-desk-mern-arifmd.herokuapp.com/](https://support-desk-mern-arifmd.herokuapp.com/).
 
 
 ## Author(s)

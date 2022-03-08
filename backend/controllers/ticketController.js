@@ -6,6 +6,12 @@ const Ticket = require('../models/ticketModel')
 // @desc    Get user tickets
 // @route   GET /api/tickets
 // @access  Private
+
+/**
+ * 'asyncHandler' is a simple middleware for handling exceptions
+ * inside of async express routes and passing them to your express
+ * error handlers.
+ */
 const getTickets = asyncHandler(async (req, res) => {
   // Get user using the id and JWT
   const user = await User.findById(req.user.id)
