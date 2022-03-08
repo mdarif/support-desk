@@ -1,14 +1,14 @@
 <p align="center">
   <a href="#">
-    <img alt="mern-app-generator" src="etc/mern-stack-brainfuel.png" width="300"/>
+    <img alt="mern-app-generator" src="https://www.mindinventory.com/blog/wp-content/uploads/2021/06/mern-stack.png" />
   </a>
 </p>
-<h3 align="center">Create, build and deploy MERN stack applications with breeze.</h3>
+<h3 align="center">Create, build and deploy MERN stack application.</h3>
 
 ## Introduction
 A Fullstack MERN Support Ticket System with Redux Toolkit.
-![MERN Stack](etc/mern-stack.png)
-![MERN Architerure](etc/what-is-mern-stack-architecture.png)
+![MERN Stack](https://miro.medium.com/max/1400/1*u8xh3we2xdp9piDGFpaHSg.png)
+![MERN Architerure](https://www.bocasay.com/wp-content/uploads/2020/03/MERN-stack-1.png)
 
 ## Getting Started
 
@@ -23,11 +23,16 @@ This section should list any major frameworks/libraries used to bootstrap your p
 * [MongoDB Compass](https://www.mongodb.com/products/compass)
   **Compass**. The GUI for MongoDB.
   Compass is an interactive tool for querying, optimizing, and analyzing your MongoDB data. Get key insights, drag and drop to build pipelines, and more.
-* [ExpressJS](https://expressjs.com/)
+* [Express.js](https://expressjs.com/)
+  Express.js, or simply Express, is a back end web application framework for Node.js, released as free and open-source software under the MIT License. It is designed for building web applications and APIs. It has been called the de facto standard server framework for Node.js.
 * [React.js](https://reactjs.org/)
-* [NodeJS](https://nodejs.org/en/)
+  A JavaScript library for building user interfaces.
+* [Node.js](https://nodejs.org/en/)
+  Node.js is a free, open-sourced, cross-platform JavaScript run-time environment that lets developers write command line tools and server-side scripts outside of a browser.
 * [Redux Toolkit](https://redux-toolkit.js.org/)
+  The official, opinionated, batteries-included toolset for efficient Redux development.
 * [Postman](https://www.postman.com/)
+  Postman is an application used for API testing.
 
 
 ### Deployed On
@@ -154,19 +159,14 @@ Inside of `/backend/controllers/ticketController.js` are a collection of.
 
   getTickets, [done]
   getTicket, [done]
-  createTicket,
+  createTicket, [done]
   updateTicket
   deleteTicket,
 
 - **GET** `/api/tickets` - Get all the tickets of logged in user while passing the right `Authorization` `Bearer Token`.
 - **POST** `/api/tickets` - Create a new ticket, requires a **URL-encoded** data in the **Body** containing key value of { product, description }
 - **GET** `/api/tickets/:id` - Get the particular ticket detail  while passing the right `Authorization` `Bearer Token`.
-- **POST** `/login` - Logs in an existing user, requires a `json` object, containing { username: String, password: String }
-- **GET** `/logout` - Logs out a logged in user.
-- **GET** `/authenticated` - Checks to see if user is logged in. Used for protecting routes.
-- **POST** `/admin` - Checks to see if a user is an admin. Used for protecting routes.
-- **GET** `/create_a_data` - Adds a data to the users record. This is used as private data storage.
-- **GET** `/get_all_datas` - Gets all private data from the user.
+- 
 [Postman](https://learning.postman.com/docs/sending-requests/requests/#sending-body-data)
 
 ### Build an application
@@ -204,4 +204,4 @@ And within a few seconds, your application will be live at [https://support-desk
 
 ## Author(s)
 
-- **Mohammad Arif** - _Initial work_ - [mdarif](https://github.com/mdarif)
+- **Mohammad Arif** - [mdarif](https://github.com/mdarif)
